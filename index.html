@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- Add favicon -->
+    <link rel="icon" type="image/png" href="Jlogo.png">
+
+    <!-- Include Quicksand Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            background: url('IMAGE LINK') no-repeat center center fixed;
+            background-size: cover;
+        }
+        iframe {
+            border: none;
+            width: 15%; /* Full width for both iframes */
+            flex: 1; /* Split the available space equally */
+        }
+        /* Countdown bubble styling */
+        #countdown {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #f0f8ff;
+            border: 2px solid #3498db;
+            border-radius: 15px;
+            padding: 10px 20px;
+            font-family: 'Quicksand', Arial, sans-serif; /* Apply Quicksand Font */
+            font-size: 14px;
+            color: #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            text-align: center; /* Center-align date and time */
+        }
+        /* "Things to do" text box styling */
+        #things-to-do {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 200px;
+            height: 100px;
+            background-color: #ffffff;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 10px;
+            font-family: 'Quicksand', Arial, sans-serif; /* Apply Quicksand Font */
+            font-size: 14px;
+            color: #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            resize: none; /* Prevent resizing of the text box */
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Countdown Timer -->
+    <div id="countdown">Loading...</div>
+
+    <!-- Editable "Things to do" Text Box -->
+    <textarea id="things-to-do" placeholder="Things to do..."></textarea>
+    <!-- top left embed -->
+  
+    <iframe 
+        class="Varible1" 
+        src="LINK" 
+        title="THE TILTE">
+    </iframe>
+
+    <!-- bottome left embed -->
+      <iframe 
+        class="spotify" 
+        src="The link"        
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>        
+
+    <script>
+        // JavaScript for live clock with date and time
+        function startClock() {
+            const clockElement = document.getElementById('countdown'); // Reusing the 'countdown' element
+
+            function updateClock() {
+                const now = new Date();
+
+                // Format the date (e.g., Tuesday, May 6, 2025)
+                const dateOptions = { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric'
+                };
+                const formattedDate = now.toLocaleDateString('en-US', dateOptions);
+
+                // Format the time (e.g., 07:22:41 PM)
+                const timeOptions = {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: true
+                };
+                const formattedTime = now.toLocaleTimeString('en-US', timeOptions);
+
+                // Display the date first, followed by the time
+                clockElement.innerHTML = `${formattedDate}<br>${formattedTime}`;
+            }
+
+            setInterval(updateClock, 1000);
+            updateClock(); // Initialize clock display
+        }
+
+        startClock();
+
+        // JavaScript for saving "Things to do" content in localStorage
+        const thingsToDoBox = document.getElementById('things-to-do');
+
+        // Load saved content from localStorage on page load
+        thingsToDoBox.value = localStorage.getItem('thingsToDo') || '';
+
+        // Save content to localStorage whenever the user types
+        thingsToDoBox.addEventListener('input', () => {
+            localStorage.setItem('thingsToDo', thingsToDoBox.value);
+        });
+    </script>
+</body>
+</html>
